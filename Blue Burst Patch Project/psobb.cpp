@@ -1,7 +1,10 @@
 #include <cstring>
 #include <stdint.h>
 #include "globals.h"
-#include "dxgi_hook.h"
+
+#ifdef PATCH_FRAMERATE
+#include "d3d8_hook.h"
+#endif
 
 // These should be specified in the project's preprocessor macros to enable.
 // In Visual Studio, right click the project in the Solution Explorer and select Properties.
@@ -27,6 +30,7 @@
 #define PATCH_INITLISTS
 #define PATCH_MAP_OBJECT_CONSTRUCTOR_LISTS
 #define PATCH_HOOKS
+#define PATCH_FRAMERATE
 #endif
 
 #ifdef PATCH_IME
@@ -132,7 +136,9 @@ void PSOBB()
     *(uint8_t*)0x007a645e = 2;
 #endif
 
-    SetupDXGIHook();
+#ifdef PATCH_FRAMERATE
+    SetupD3D8Hook();
+#endif
 
 #ifdef PATCH_OMNISPAWN
     Omnispawn::ApplyOmnispawnPatch();
