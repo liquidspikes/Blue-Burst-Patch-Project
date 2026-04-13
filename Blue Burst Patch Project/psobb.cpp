@@ -1,6 +1,7 @@
 #include <cstring>
 #include <stdint.h>
 #include "globals.h"
+#include "dxgi_hook.h"
 
 // These should be specified in the project's preprocessor macros to enable.
 // In Visual Studio, right click the project in the Solution Explorer and select Properties.
@@ -130,6 +131,8 @@ void PSOBB()
 #ifdef PATCH_SKIP_INTRO_CREDITS
     *(uint8_t*)0x007a645e = 2;
 #endif
+
+    SetupDXGIHook();
 
 #ifdef PATCH_OMNISPAWN
     Omnispawn::ApplyOmnispawnPatch();

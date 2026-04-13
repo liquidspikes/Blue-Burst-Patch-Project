@@ -1,0 +1,3 @@
+LIBRARY bbio
+EXPORTS
+    InstallDXGIHookSync
